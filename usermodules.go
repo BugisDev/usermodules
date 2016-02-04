@@ -5,7 +5,6 @@ import (
 
 	"github.com/bugisdev/helper"
 	"github.com/jinzhu/gorm"
-	"github.com/ngurajeka/ngurajeka.com/app"
 )
 
 // Login Function
@@ -151,7 +150,7 @@ func UpdateSingle(id int, f UserUpdateForm, DB *gorm.DB) (user User, err []helpe
 	user.Profile.BirthPlace = f.Data.BirthPlace
 	user.Profile.BirthDate, _ = time.Parse("01/02/2006", f.Data.BirthDate)
 
-	_errSaving := app.DB.Save(&user).Error
+	_errSaving := DB.Save(&user).Error
 	if _errSaving != nil {
 		err = append(err, helper.ErrorMessage{
 			Code:    400,
