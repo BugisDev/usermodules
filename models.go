@@ -23,8 +23,8 @@ type Profile struct {
 	ID          int       `json:"id,omitempty"`
 	UserID      int       `json:"userId,omitempty" sql:"index"`
 	Gender      int8      `json:"gender,omitempty"`
-	Address     string    `json:"address,omitempty"`
-	PhoneNumber string    `json:"phone_number,omitempty"`
-	BirthPlace  string    `json:"birth_place,omitempty"`
-	BirthDate   time.Time `json:"birth_date,omitempty"`
+	Address     string    `json:"address,omitempty" sql:"null;type:varchar(255)"`
+	PhoneNumber string    `json:"phone_number,omitempty" sql:"null;type:varchar(64)"`
+	BirthPlace  string    `json:"birth_place,omitempty" sql:"null;type:varchar(64)"`
+	BirthDate   time.Time `json:"birth_date,omitempty" sql:"null"`
 }

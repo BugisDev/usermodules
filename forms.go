@@ -69,3 +69,18 @@ func (f *UserRegisterForm) Validate() (v revel.Validation) {
 
 	return v
 }
+
+// UserUpdateForm Handling User Update
+type UserUpdateForm struct {
+	Data UserUpdateData `json:"data"`
+}
+
+// UserUpdateData Data post when Updating User
+type UserUpdateData struct {
+	Fullname    string `json:"full_name"`
+	Gender      int8   `json:"gender,omitempty"`
+	Address     string `json:"address,omitempty"`
+	PhoneNumber string `json:"phone_number,omitempty"`
+	BirthPlace  string `json:"birth_place,omitempty"`
+	BirthDate   string `json:"birth_date,omitempty"`
+}
