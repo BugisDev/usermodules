@@ -99,7 +99,7 @@ func NewUser(f UserRegisterForm, DB *gorm.DB) (user User, err []helper.ErrorMess
 // GetAll Function, Fetch All Users with Offset and Limit
 func GetAll(limit, offset int, DB *gorm.DB) (users []User, err []helper.ErrorMessage) {
 
-	_err := DB.Find(&users).Limit(limit).Offset(offset).Error
+	_err := DB.Limit(limit).Offset(offset).Find(&users).Error
 	if _err != nil {
 		err = append(err, helper.ErrorMessage{
 			Code:    400,
@@ -109,6 +109,12 @@ func GetAll(limit, offset int, DB *gorm.DB) (users []User, err []helper.ErrorMes
 		})
 
 		return users, err
+	}
+
+	for i, user := range users {
+		var profile Profile
+		DB.Model(&user).Related(&profile)
+		users[i].Profile = profile
 	}
 
 	return users, nil
